@@ -1,0 +1,358 @@
+// This is your Prisma schema file,
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// User model with multi-tenant support
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  password     String?
+  role         UserRole @default(STUDENT)
+  schoolId     String
+  profileImage String?
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  school       School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  accounts     Account[]
+  sessions     Session[]
+
+  // Role-specific relations
+  teacher      Teacher?
+  student      Student?
+  parent       Parent?
+
+  @@map("users")
+}
+
+// School model for multi-tenancy
+model School {
+  id            String      @id @default(cuid())
+  name          String
+  logoUrl       String?
+  theme         Json        @default("{}")
+  domain        String      @unique
+  address       String
+  phone         String
+  email         String
+  principalName String
+  isActive      Boolean     @default(true)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  // Relations
+  users         User[]
+  students      Student[]
+  teachers      Teacher[]
+  parents       Parent[]
+  classes       Class[]
+  exams         Exam[]
+  fees          Fee[]
+  notifications Notification[]
+
+  @@map("schools")
+}
+
+// Student model
+model Student {
+  id            String   @id @default(cuid())
+  name          String
+  rollNumber    String
+  class         String
+  section       String
+  parentId      String
+  schoolId      String
+  userId        String?  @unique
+  dateOfBirth   DateTime
+  gender        Gender
+  address       String
+  phone         String?
+  email         String?
+  admissionDate DateTime
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  school        School       @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  parent        Parent       @relation(fields: [parentId], references: [id], onDelete: Cascade)
+  user          User?        @relation(fields: [userId], references: [id])
+  attendance    Attendance[]
+  results       Result[]
+  fees          Fee[]
+
+  @@unique([rollNumber, schoolId])
+  @@map("students")
+}
+
+// Teacher model
+model Teacher {
+  id           String   @id @default(cuid())
+  name         String
+  employeeId   String
+  subjects     String[]
+  schoolId     String
+  userId       String?  @unique
+  qualification String
+  experience   Int      @default(0)
+  phone        String
+  email        String
+  address      String
+  joiningDate  DateTime
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  school       School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  user         User?    @relation(fields: [userId], references: [id])
+
+  @@unique([employeeId, schoolId])
+  @@map("teachers")
+}
+
+// Parent model
+model Parent {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  address   String
+  schoolId  String
+  userId    String?  @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  school    School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  user      User?     @relation(fields: [userId], references: [id])
+  students  Student[]
+
+  @@map("parents")
+}
+
+// Class model
+model Class {
+  id        String   @id @default(cuid())
+  name      String
+  section   String
+  schoolId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  school    School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@unique([name, section, schoolId])
+  @@map("classes")
+}
+
+// Attendance model
+model Attendance {
+  id        String           @id @default(cuid())
+  studentId String
+  date      DateTime
+  status    AttendanceStatus
+  remarks   String?
+  markedBy  String
+  schoolId  String
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  // Relations
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, date])
+  @@map("attendance")
+}
+
+// Exam model
+model Exam {
+  id           String   @id @default(cuid())
+  name         String
+  type         ExamType
+  subject      String
+  class        String
+  section      String
+  date         DateTime
+  duration     Int      // in minutes
+  totalMarks   Int
+  passingMarks Int
+  schoolId     String
+  createdBy    String
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relations
+  school       School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  results      Result[]
+
+  @@map("exams")
+}
+
+// Result model
+model Result {
+  id            String @id @default(cuid())
+  examId        String
+  studentId     String
+  subject       String
+  marksObtained Int
+  totalMarks    Int
+  grade         String
+  remarks       String?
+  schoolId      String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  exam          Exam    @relation(fields: [examId], references: [id], onDelete: Cascade)
+  student       Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([examId, studentId])
+  @@map("results")
+}
+
+// Fee model
+model Fee {
+  id          String   @id @default(cuid())
+  studentId   String
+  type        FeeType
+  amount      Float
+  dueDate     DateTime
+  paidDate    DateTime?
+  status      FeeStatus @default(PENDING)
+  description String?
+  schoolId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  student     Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@map("fees")
+}
+
+// Notification model
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  title     String
+  message   String
+  type      NotificationType
+  isRead    Boolean          @default(false)
+  data      Json?
+  schoolId  String
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  // Relations
+  school    School @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+// NextAuth models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// Enums
+enum UserRole {
+  ADMIN
+  TEACHER
+  STUDENT
+  PARENT
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+  LATE
+  EXCUSED
+}
+
+enum ExamType {
+  MONTHLY
+  QUARTERLY
+  HALF_YEARLY
+  ANNUAL
+  PRACTICAL
+  ASSIGNMENT
+}
+
+enum FeeType {
+  TUITION
+  TRANSPORT
+  LIBRARY
+  LABORATORY
+  SPORTS
+  EXAMINATION
+  MISCELLANEOUS
+}
+
+enum FeeStatus {
+  PENDING
+  PAID
+  OVERDUE
+  WAIVED
+}
+
+enum NotificationType {
+  INFO
+  WARNING
+  SUCCESS
+  ERROR
+}
