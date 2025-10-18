@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Response } from 'express'
 import { body, validationResult } from 'express-validator'
 import { prisma } from '../server'
 import { asyncHandler, createError } from '../middlewares/errorHandler'
@@ -8,18 +8,18 @@ const router = express.Router()
 
 // School validation rules
 const schoolValidation = [
-  body('name').trim().isLength({ min: 2, max: 100 }).withMessage('स्कूल का नाम 2-100 अक्षरों का होना चाहिए'),
-  body('domain').isURL({ protocols: ['http', 'https'], require_protocol: false }).withMessage('वैध डोमेन दर्ज करें'),
-  body('address').trim().isLength({ min: 10, max: 500 }).withMessage('पता 10-500 अक्षरों का होना चाहिए'),
-  body('phone').isMobilePhone('any').withMessage('वैध फोन नंबर दर्ज करें'),
-  body('email').isEmail().normalizeEmail().withMessage('वैध ईमेल दर्ज करें'),
-  body('principalName').trim().isLength({ min: 2, max: 50 }).withMessage('प्रिंसिपल का नाम 2-50 अक्षरों का होना चाहिए'),
+  body('name').trim().isLength({ min: 2, max: 100 }).withMessage('School name must be between 2-100 characters'),
+  body('domain').isURL({ protocols: ['http', 'https'], require_protocol: false }).withMessage('Please enter a valid domain'),
+  body('address').trim().isLength({ min: 10, max: 500 }).withMessage('Address must be between 10-500 characters'),
+  body('phone').isMobilePhone('any').withMessage('Please enter a valid phone number'),
+  body('email').isEmail().normalizeEmail().withMessage('Please enter a valid email address'),
+  body('principalName').trim().isLength({ min: 2, max: 50 }).withMessage('Principal name must be between 2-50 characters'),
 ]
 
 // @route   GET /api/schools
 // @desc    Get all schools
 // @access  Public
-router.get('/', asyncHandler(async (req: AuthRequest, res) => {
+router.get('/', asyncHandler(async (req: AuthRequest, res: Response) => {
   const { page = 1, limit = 10, search } = req.query
 
   const where = {
@@ -68,7 +68,7 @@ router.get('/', asyncHandler(async (req: AuthRequest, res) => {
 // @route   GET /api/schools/:id
 // @desc    Get school by ID
 // @access  Public
-router.get('/:id', asyncHandler(async (req: AuthRequest, res) => {
+router.get('/:id', asyncHandler(async (req: AuthRequest, res: Response) => {
   const { id } = req.params
 
   const school = await prisma.school.findUnique({
@@ -102,7 +102,7 @@ router.get('/:id', asyncHandler(async (req: AuthRequest, res) => {
 // @route   POST /api/schools
 // @desc    Create a new school
 // @access  Public (in real app, this might be admin-only)
-router.post('/', schoolValidation, asyncHandler(async (req: AuthRequest, res) => {
+router.post('/', schoolValidation, asyncHandler(async (req: AuthRequest, res: Response) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json({
@@ -164,7 +164,7 @@ router.post('/', schoolValidation, asyncHandler(async (req: AuthRequest, res) =>
 // @route   PUT /api/schools/:id
 // @desc    Update school
 // @access  Private (Admin only)
-router.put('/:id', schoolValidation, asyncHandler(async (req: AuthRequest, res) => {
+router.put('/:id', schoolValidation, asyncHandler(async (req: AuthRequest, res: Response) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json({
@@ -235,7 +235,7 @@ router.put('/:id', schoolValidation, asyncHandler(async (req: AuthRequest, res) 
 // @route   DELETE /api/schools/:id
 // @desc    Delete school (soft delete)
 // @access  Private (Admin only)
-router.delete('/:id', asyncHandler(async (req: AuthRequest, res) => {
+router.delete('/:id', asyncHandler(async (req: AuthRequest, res: Response) => {
   const { id } = req.params
 
   // Check if school exists
@@ -262,7 +262,7 @@ router.delete('/:id', asyncHandler(async (req: AuthRequest, res) => {
 // @route   GET /api/schools/:id/stats
 // @desc    Get school statistics
 // @access  Public
-router.get('/:id/stats', asyncHandler(async (req: AuthRequest, res) => {
+router.get('/:id/stats', asyncHandler(async (req: AuthRequest, res: Response) => {
   const { id } = req.params
 
   const school = await prisma.school.findUnique({

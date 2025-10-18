@@ -43,7 +43,7 @@ export default function DashboardPage() {
           <div></div>
           <div></div>
         </div>
-        <p className="mt-4 text-gray-600">लोड हो रहा है...</p>
+        <p className="mt-4 text-gray-600">Loading...</p>
       </div>
     </div>
   )

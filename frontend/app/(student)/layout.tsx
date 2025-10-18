@@ -24,7 +24,7 @@ export default async function StudentLayout({
         <div className="w-64 bg-white dark:bg-gray-800 shadow-lg">
           <div className="p-6">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-              छात्र पैनल
+              Student Panel
             </h2>
           </div>
           <nav className="mt-6">
@@ -33,49 +33,49 @@ export default async function StudentLayout({
                 href="/student/dashboard"
                 className="block px-3 py-2 text-sm font-medium text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 rounded-md"
               >
-                डैशबोर्ड
+                Dashboard
               </a>
               <a
                 href="/student/timetable"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                समय सारिणी
+                Timetable
               </a>
               <a
                 href="/student/attendance"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                उपस्थिति
+                Attendance
               </a>
               <a
                 href="/student/exams"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                परीक्षाएं
+                Exams
               </a>
               <a
                 href="/student/results"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                परिणाम
+                Results
               </a>
               <a
                 href="/student/fees"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                शुल्क
+                Fees
               </a>
               <a
                 href="/student/library"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                लाइब्रेरी
+                Library
               </a>
               <a
                 href="/student/profile"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                प्रोफाइल
+                Profile
               </a>
             </div>
           </nav>
@@ -99,7 +99,7 @@ export default async function StudentLayout({
                   href="/api/auth/signout"
                   className="text-sm text-red-600 hover:text-red-800"
                 >
-                  लॉगआउट
+                  Logout
                 </a>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Response } from 'express'
 import { prisma } from '../server'
 import { asyncHandler } from '../middlewares/errorHandler'
 import { AuthRequest } from '../middlewares/auth'
@@ -9,7 +9,7 @@ const router = express.Router()
 // @route   GET /api/attendance
 // @desc    Get attendance records
 // @access  Private
-router.get('/', asyncHandler(async (req: AuthRequest & TenantRequest, res) => {
+router.get('/', asyncHandler(async (req: AuthRequest & TenantRequest, res: Response) => {
   const { schoolId } = req
   const { page = 1, limit = 10, date, class: className, section } = req.query
 

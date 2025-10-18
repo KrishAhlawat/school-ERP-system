@@ -1,15 +1,16 @@
-import express from 'express'
+import express, { Response } from 'express'
 import { prisma } from '../server'
 import { asyncHandler } from '../middlewares/errorHandler'
 import { AuthRequest } from '../middlewares/auth'
 import { TenantRequest } from '../middlewares/tenant'
+import { FeeType } from '@prisma/client'
 
 const router = express.Router()
 
 // @route   GET /api/fees
 // @desc    Get all fees for the school
 // @access  Private
-router.get('/', asyncHandler(async (req: AuthRequest & TenantRequest, res) => {
+router.get('/', asyncHandler(async (req: AuthRequest & TenantRequest, res: Response) => {
   const { schoolId } = req
   const { page = 1, limit = 10, status, type, studentId } = req.query
 
@@ -17,10 +18,10 @@ router.get('/', asyncHandler(async (req: AuthRequest & TenantRequest, res) => {
     throw new Error('School context required')
   }
 
-  const where = {
+  const where: any = {
     schoolId,
     ...(status && { status: status as string }),
-    ...(type && { type: type as string }),
+    ...(type && Object.values(FeeType).includes(type as FeeType) && { type: type as FeeType }),
     ...(studentId && { studentId: studentId as string }),
   }
 

@@ -13,8 +13,8 @@ import { useToast } from '@/hooks/use-toast'
 import { Eye, EyeOff, School, User, Lock } from 'lucide-react'
 
 const loginSchema = z.object({
-  email: z.string().email('वैध ईमेल दर्ज करें'),
-  password: z.string().min(6, 'पासवर्ड कम से कम 6 अक्षर का होना चाहिए'),
+  email: z.string().email('Please enter a valid email'),
+  password: z.string().min(6, 'Password must be at least 6 characters long'),
   schoolDomain: z.string().optional(),
 })
 
@@ -47,8 +47,8 @@ export default function LoginPage() {
 
       if (result?.error) {
         toast({
-          title: 'लॉगिन असफल',
-          description: 'गलत ईमेल या पासवर्ड',
+          title: 'Login Failed',
+          description: 'Invalid email or password',
           variant: 'destructive',
         })
       } else if (result?.ok) {
@@ -73,14 +73,14 @@ export default function LoginPage() {
         }
 
         toast({
-          title: 'सफल लॉगिन',
-          description: `स्वागत है, ${session?.user.name}!`,
+          title: 'Login Successful',
+          description: `Welcome, ${session?.user.name}!`,
         })
       }
     } catch (error) {
       toast({
-        title: 'त्रुटि',
-        description: 'कुछ गलत हुआ है। कृपया बाद में कोशिश करें।',
+        title: 'Error',
+        description: 'Something went wrong. Please try again later.',
         variant: 'destructive',
       })
     } finally {
@@ -94,8 +94,8 @@ export default function LoginPage() {
       await signIn('google', { callbackUrl: '/dashboard' })
     } catch (error) {
       toast({
-        title: 'त्रुटि',
-        description: 'Google लॉगिन असफल',
+        title: 'Error',
+        description: 'Google login failed',
         variant: 'destructive',
       })
     } finally {
@@ -104,25 +104,25 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <School className="h-12 w-12 text-primary" />
+            <School className="w-12 h-12 text-primary" />
           </div>
           <CardTitle className="text-2xl font-bold">School ERP System</CardTitle>
           <CardDescription>
-            अपने खाते में लॉगिन करें
+            Login to your account
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
               <label htmlFor="email" className="text-sm font-medium">
-                ईमेल
+                Email
               </label>
               <div className="relative">
-                <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <User className="absolute w-4 h-4 left-3 top-3 text-muted-foreground" />
                 <Input
                   id="email"
                   type="email"
@@ -138,10 +138,10 @@ export default function LoginPage() {
 
             <div className="space-y-2">
               <label htmlFor="password" className="text-sm font-medium">
-                पासवर्ड
+                Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                <Lock className="absolute w-4 h-4 left-3 top-3 text-muted-foreground" />
                 <Input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
@@ -151,7 +151,7 @@ export default function LoginPage() {
                 />
                 <button
                   type="button"
-                  className="absolute right-3 top-3 h-4 w-4 text-muted-foreground hover:text-foreground"
+                  className="absolute w-4 h-4 right-3 top-3 text-muted-foreground hover:text-foreground"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   {showPassword ? <EyeOff /> : <Eye />}
@@ -164,7 +164,7 @@ export default function LoginPage() {
 
             <div className="space-y-2">
               <label htmlFor="schoolDomain" className="text-sm font-medium">
-                स्कूल डोमेन (वैकल्पिक)
+                School Domain (Optional)
               </label>
               <Input
                 id="schoolDomain"
@@ -179,7 +179,7 @@ export default function LoginPage() {
               className="w-full"
               disabled={isLoading}
             >
-              {isLoading ? 'लॉगिन हो रहे हैं...' : 'लॉगिन करें'}
+              {isLoading ? 'Logging in...' : 'Login'}
             </Button>
           </form>
 
@@ -189,8 +189,8 @@ export default function LoginPage() {
                 <span className="w-full border-t" />
               </div>
               <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">
-                  या
+                <span className="px-2 bg-background text-muted-foreground">
+                  or
                 </span>
               </div>
             </div>
@@ -202,7 +202,7 @@ export default function LoginPage() {
               onClick={handleGoogleSignIn}
               disabled={isLoading}
             >
-              Google के साथ लॉगिन करें
+              Continue with Google
             </Button>
           </div>
         </CardContent>

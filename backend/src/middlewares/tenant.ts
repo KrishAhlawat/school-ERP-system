@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from 'express'
+import { AuthRequest } from './auth'
 import { prisma } from '../server'
 
-export interface TenantRequest extends Request {
+export interface TenantRequest extends AuthRequest {
   schoolId?: string
   school?: any
 }

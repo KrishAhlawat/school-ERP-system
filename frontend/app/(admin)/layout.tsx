@@ -24,7 +24,7 @@ export default async function AdminLayout({
         <div className="w-64 bg-white dark:bg-gray-800 shadow-lg">
           <div className="p-6">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-              प्रशासक पैनल
+              Admin Panel
             </h2>
           </div>
           <nav className="mt-6">
@@ -33,49 +33,49 @@ export default async function AdminLayout({
                 href="/admin/dashboard"
                 className="block px-3 py-2 text-sm font-medium text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 rounded-md"
               >
-                डैशबोर्ड
+                Dashboard
               </a>
               <a
                 href="/admin/students"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                छात्र प्रबंधन
+                Student Management
               </a>
               <a
                 href="/admin/teachers"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                शिक्षक प्रबंधन
+                Teacher Management
               </a>
               <a
                 href="/admin/attendance"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                उपस्थिति
+                Attendance
               </a>
               <a
                 href="/admin/exams"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                परीक्षाएं
+                Exams
               </a>
               <a
                 href="/admin/fees"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                शुल्क प्रबंधन
+                Fee Management
               </a>
               <a
                 href="/admin/reports"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                रिपोर्ट्स
+                Reports
               </a>
               <a
                 href="/admin/settings"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                सेटिंग्स
+                Settings
               </a>
             </div>
           </nav>
@@ -99,7 +99,7 @@ export default async function AdminLayout({
                   href="/api/auth/signout"
                   className="text-sm text-red-600 hover:text-red-800"
                 >
-                  लॉगआउट
+                  Logout
                 </a>
               </div>
             </div>

@@ -5,10 +5,10 @@ export default function TeachersPage() {
     <div className="p-6">
       <div className="mb-6">
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          शिक्षक प्रबंधन
+          Teacher Management
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
-          सभी शिक्षकों की जानकारी देखें और प्रबंधन करें
+          View and manage all teacher information
         </p>
       </div>
 

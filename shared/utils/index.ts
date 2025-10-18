@@ -53,10 +53,10 @@ export const isValidPassword = (password: string): boolean => {
 // Role utilities
 export const getRoleDisplayName = (role: UserRole): string => {
   const roleNames = {
-    [UserRole.ADMIN]: 'प्रशासक',
-    [UserRole.TEACHER]: 'शिक्षक',
-    [UserRole.STUDENT]: 'छात्र',
-    [UserRole.PARENT]: 'अभिभावक'
+    [UserRole.ADMIN]: 'Administrator',
+    [UserRole.TEACHER]: 'Teacher',
+    [UserRole.STUDENT]: 'Student',
+    [UserRole.PARENT]: 'Parent'
   };
   return roleNames[role] || role;
 };
@@ -86,10 +86,10 @@ export const getAttendanceStatusColor = (status: AttendanceStatus): string => {
 
 export const getAttendanceStatusText = (status: AttendanceStatus): string => {
   const texts = {
-    [AttendanceStatus.PRESENT]: 'उपस्थित',
-    [AttendanceStatus.ABSENT]: 'अनुपस्थित',
-    [AttendanceStatus.LATE]: 'देर से आया',
-    [AttendanceStatus.EXCUSED]: 'छुट्टी'
+    [AttendanceStatus.PRESENT]: 'Present',
+    [AttendanceStatus.ABSENT]: 'Absent',
+    [AttendanceStatus.LATE]: 'Late',
+    [AttendanceStatus.EXCUSED]: 'Excused'
   };
   return texts[status] || status;
 };
@@ -106,12 +106,12 @@ export const getFeeStatusColor = (status: FeeStatus): string => {
 
 export const getExamTypeText = (type: ExamType): string => {
   const texts = {
-    [ExamType.MONTHLY]: 'मासिक',
-    [ExamType.QUARTERLY]: 'त्रैमासिक',
-    [ExamType.HALF_YEARLY]: 'अर्धवार्षिक',
-    [ExamType.ANNUAL]: 'वार्षिक',
-    [ExamType.PRACTICAL]: 'प्रायोगिक',
-    [ExamType.ASSIGNMENT]: 'असाइनमेंट'
+    [ExamType.MONTHLY]: 'Monthly',
+    [ExamType.QUARTERLY]: 'Quarterly',
+    [ExamType.HALF_YEARLY]: 'Half Yearly',
+    [ExamType.ANNUAL]: 'Annual',
+    [ExamType.PRACTICAL]: 'Practical',
+    [ExamType.ASSIGNMENT]: 'Assignment'
   };
   return texts[type] || type;
 };
@@ -219,7 +219,7 @@ export const handleApiError = (error: any): string => {
   if (error.message) {
     return error.message;
   }
-  return 'कुछ गलत हुआ है। कृपया बाद में कोशिश करें।';
+  return 'Something went wrong. Please try again later.';
 };
 
 // Local storage utilities

@@ -9,30 +9,30 @@ export default function StudentDashboard() {
 
   const stats = [
     {
-      title: 'मेरी उपस्थिति',
+      title: 'My Attendance',
       value: '95%',
       change: '+2%',
       icon: TrendingUp,
       color: 'text-green-600',
     },
     {
-      title: 'कुल विषय',
+      title: 'Total Subjects',
       value: '6',
-      change: 'सक्रिय',
+      change: 'Active',
       icon: BookOpen,
       color: 'text-blue-600',
     },
     {
-      title: 'आगामी परीक्षा',
+      title: 'Upcoming Exams',
       value: '3',
-      change: 'इस सप्ताह',
+      change: 'This week',
       icon: Calendar,
       color: 'text-orange-600',
     },
     {
-      title: 'अंतिम ग्रेड',
+      title: 'Latest Grade',
       value: 'A+',
-      change: 'गणित',
+      change: 'Mathematics',
       icon: Award,
       color: 'text-purple-600',
     },
@@ -40,48 +40,48 @@ export default function StudentDashboard() {
 
   const upcomingExams = [
     {
-      subject: 'गणित',
+      subject: 'Mathematics',
       date: '2024-01-25',
       time: '10:00 AM',
-      duration: '3 घंटे',
-      type: 'मिड टर्म',
+      duration: '3 hours',
+      type: 'Mid Term',
     },
     {
-      subject: 'हिंदी',
+      subject: 'Hindi',
       date: '2024-01-28',
       time: '11:00 AM',
-      duration: '2 घंटे',
-      type: 'यूनिट टेस्ट',
+      duration: '2 hours',
+      type: 'Unit Test',
     },
     {
-      subject: 'अंग्रेजी',
+      subject: 'English',
       date: '2024-01-30',
       time: '09:00 AM',
-      duration: '2 घंटे',
-      type: 'असाइनमेंट',
+      duration: '2 hours',
+      type: 'Assignment',
     },
   ]
 
   const recentResults = [
     {
-      subject: 'गणित',
+      subject: 'Mathematics',
       marks: '85/100',
       grade: 'A+',
-      exam: 'मिड टर्म',
+      exam: 'Mid Term',
       date: '2024-01-15',
     },
     {
-      subject: 'हिंदी',
+      subject: 'Hindi',
       marks: '78/100',
       grade: 'A',
-      exam: 'यूनिट टेस्ट',
+      exam: 'Unit Test',
       date: '2024-01-10',
     },
     {
-      subject: 'अंग्रेजी',
+      subject: 'English',
       marks: '92/100',
       grade: 'A+',
-      exam: 'असाइनमेंट',
+      exam: 'Assignment',
       date: '2024-01-08',
     },
   ]
@@ -90,20 +90,20 @@ export default function StudentDashboard() {
     <div className="p-6 space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          छात्र डैशबोर्ड
+          Student Dashboard
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
-          स्वागत है, {session?.user?.name}! आपकी प्रगति यहां देखें।
+          Welcome, {session?.user?.name}! Check your progress here.
         </p>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat, index) => {
           const Icon = stat.icon
           return (
-            <Card key={index} className="hover:shadow-lg transition-shadow">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <Card key={index} className="transition-shadow hover:shadow-lg">
+              <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
                 <CardTitle className="text-sm font-medium">
                   {stat.title}
                 </CardTitle>
@@ -120,16 +120,16 @@ export default function StudentDashboard() {
         })}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Upcoming Exams */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Calendar className="h-5 w-5" />
-              आगामी परीक्षाएं
+              Upcoming Exams
             </CardTitle>
             <CardDescription>
-              अगली परीक्षाओं की जानकारी
+              Information about next exams
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -145,7 +145,7 @@ export default function StudentDashboard() {
                   </div>
                   <div className="text-right">
                     <div className="flex items-center gap-1 text-sm text-gray-500">
-                      <Clock className="h-3 w-3" />
+                      <Clock className="w-3 h-3" />
                       {exam.duration}
                     </div>
                   </div>
@@ -159,11 +159,11 @@ export default function StudentDashboard() {
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Award className="h-5 w-5" />
-              हाल के परिणाम
+              <Award className="w-5 h-5" />
+              Recent Results
             </CardTitle>
             <CardDescription>
-              आपके हाल के परीक्षा परिणाम
+              Your recent exam results
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -176,7 +176,7 @@ export default function StudentDashboard() {
                     <p className="text-xs text-gray-400">{result.date}</p>
                   </div>
                   <div className="text-right">
-                    <div className="font-bold text-lg">{result.marks}</div>
+                    <div className="text-lg font-bold">{result.marks}</div>
                     <div className={`text-sm font-medium ${
                       result.grade === 'A+' ? 'text-green-600' :
                       result.grade === 'A' ? 'text-blue-600' :
@@ -196,28 +196,28 @@ export default function StudentDashboard() {
       {/* Quick Actions */}
       <Card>
         <CardHeader>
-          <CardTitle>त्वरित कार्य</CardTitle>
+          <CardTitle>Quick Actions</CardTitle>
           <CardDescription>
-            सामान्य कार्यों के लिए शॉर्टकट
+            Shortcuts for common tasks
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            <button className="p-3 text-left border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-              <div className="font-medium">टाइम टेबल</div>
-              <div className="text-sm text-gray-500">कक्षा शेड्यूल</div>
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+            <button className="p-3 text-left transition-colors border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">
+              <div className="font-medium">Timetable</div>
+              <div className="text-sm text-gray-500">Class Schedule</div>
             </button>
-            <button className="p-3 text-left border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-              <div className="font-medium">असाइनमेंट</div>
-              <div className="text-sm text-gray-500">होमवर्क</div>
+            <button className="p-3 text-left transition-colors border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">
+              <div className="font-medium">Assignments</div>
+              <div className="text-sm text-gray-500">Homework</div>
             </button>
-            <button className="p-3 text-left border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-              <div className="font-medium">लाइब्रेरी</div>
-              <div className="text-sm text-gray-500">किताबें</div>
+            <button className="p-3 text-left transition-colors border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">
+              <div className="font-medium">Library</div>
+              <div className="text-sm text-gray-500">Books</div>
             </button>
-            <button className="p-3 text-left border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-              <div className="font-medium">फीस</div>
-              <div className="text-sm text-gray-500">भुगतान</div>
+            <button className="p-3 text-left transition-colors border rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800">
+              <div className="font-medium">Fees</div>
+              <div className="text-sm text-gray-500">Payment</div>
             </button>
           </div>
         </CardContent>

@@ -9,23 +9,23 @@ export default function AuthErrorPage() {
         <div className="text-center">
           <AlertCircle className="mx-auto h-16 w-16 text-red-500" />
           <h2 className="mt-6 text-3xl font-bold text-gray-900 dark:text-white">
-            प्रमाणीकरण त्रुटि
+            Authentication Error
           </h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            लॉगिन प्रक्रिया में कुछ गलत हुआ है। कृपया दोबारा कोशिश करें।
+            Something went wrong during the login process. Please try again.
           </p>
         </div>
         
         <div className="mt-8 space-y-4">
           <Link href="/login">
             <Button className="w-full">
-              दोबारा लॉगिन करें
+              Try Login Again
             </Button>
           </Link>
           
           <Link href="/">
             <Button variant="outline" className="w-full">
-              होम पेज पर जाएं
+              Go to Home
             </Button>
           </Link>
         </div>

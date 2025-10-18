@@ -39,7 +39,7 @@ const PORT = process.env.PORT || 5000
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
-  message: 'बहुत सारे requests भेजे गए हैं। कृपया कुछ समय बाद कोशिश करें।',
+  message: 'Too many requests sent. Please try again after some time.',
   standardHeaders: true,
   legacyHeaders: false,
 })

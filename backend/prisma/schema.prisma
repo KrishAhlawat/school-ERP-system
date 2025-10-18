@@ -240,6 +240,7 @@ model Fee {
 
   // Relations
   student     Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  school      School  @relation(fields: [schoolId], references: [id], onDelete: Cascade)
 
   @@map("fees")
 }

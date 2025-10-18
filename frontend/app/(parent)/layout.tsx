@@ -24,7 +24,7 @@ export default async function ParentLayout({
         <div className="w-64 bg-white dark:bg-gray-800 shadow-lg">
           <div className="p-6">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-              अभिभावक पैनल
+              Parent Panel
             </h2>
           </div>
           <nav className="mt-6">
@@ -33,49 +33,49 @@ export default async function ParentLayout({
                 href="/parent/dashboard"
                 className="block px-3 py-2 text-sm font-medium text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 rounded-md"
               >
-                डैशबोर्ड
+                Dashboard
               </a>
               <a
                 href="/parent/children"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                मेरे बच्चे
+                My Children
               </a>
               <a
                 href="/parent/attendance"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                उपस्थिति
+                Attendance
               </a>
               <a
                 href="/parent/exams"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                परीक्षाएं
+                Exams
               </a>
               <a
                 href="/parent/results"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                परिणाम
+                Results
               </a>
               <a
                 href="/parent/fees"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                शुल्क
+                Fees
               </a>
               <a
                 href="/parent/communication"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                संचार
+                Communication
               </a>
               <a
                 href="/parent/profile"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                प्रोफाइल
+                Profile
               </a>
             </div>
           </nav>
@@ -99,7 +99,7 @@ export default async function ParentLayout({
                   href="/api/auth/signout"
                   className="text-sm text-red-600 hover:text-red-800"
                 >
-                  लॉगआउट
+                  Logout
                 </a>
               </div>
             </div>

@@ -9,12 +9,12 @@ async function main() {
   // Create demo schools
   const school1 = await prisma.school.create({
     data: {
-      name: 'दिल्ली पब्लिक स्कूल',
+      name: 'Delhi Public School',
       domain: 'dps.yourapp.com',
-      address: '123 एजुकेशन स्ट्रीट, नई दिल्ली - 110001',
+      address: '123 Education Street, New Delhi - 110001',
       phone: '+91-11-23456789',
       email: 'info@dps.com',
-      principalName: 'डॉ. राजेश कुमार',
+      principalName: 'Dr. Rajesh Kumar',
       theme: {
         primaryColor: '#3b82f6',
         secondaryColor: '#64748b',
@@ -26,12 +26,12 @@ async function main() {
 
   const school2 = await prisma.school.create({
     data: {
-      name: 'मॉडर्न स्कूल',
+      name: 'Modern School',
       domain: 'modern.yourapp.com',
-      address: '456 नॉलेज एवेन्यू, मुंबई - 400001',
+      address: '456 Knowledge Avenue, Mumbai - 400001',
       phone: '+91-22-98765432',
       email: 'contact@modernschool.com',
-      principalName: 'श्रीमती प्रिया शर्मा',
+      principalName: 'Mrs. Priya Sharma',
       theme: {
         primaryColor: '#10b981',
         secondaryColor: '#6b7280',
@@ -47,7 +47,7 @@ async function main() {
   const admin1Password = await bcrypt.hash('admin123', 12)
   const admin1 = await prisma.user.create({
     data: {
-      name: 'डॉ. राजेश कुमार',
+      name: 'Dr. Rajesh Kumar',
       email: 'admin@dps.com',
       password: admin1Password,
       role: UserRole.ADMIN,
@@ -58,7 +58,7 @@ async function main() {
   const admin2Password = await bcrypt.hash('admin123', 12)
   const admin2 = await prisma.user.create({
     data: {
-      name: 'श्रीमती प्रिया शर्मा',
+      name: 'Mrs. Priya Sharma',
       email: 'admin@modernschool.com',
       password: admin2Password,
       role: UserRole.ADMIN,
@@ -72,7 +72,7 @@ async function main() {
   const teacher1Password = await bcrypt.hash('teacher123', 12)
   const teacher1 = await prisma.user.create({
     data: {
-      name: 'अमित कुमार',
+      name: 'Amit Kumar',
       email: 'amit@dps.com',
       password: teacher1Password,
       role: UserRole.TEACHER,
@@ -82,7 +82,7 @@ async function main() {
 
   await prisma.teacher.create({
     data: {
-      name: 'अमित कुमार',
+      name: 'Amit Kumar',
       employeeId: 'T001',
       subjects: ['Mathematics', 'Physics'],
       schoolId: school1.id,
@@ -91,7 +91,7 @@ async function main() {
       experience: 5,
       phone: '+91-9876543210',
       email: 'amit@dps.com',
-      address: '789 टीचर कोलोनी, नई दिल्ली',
+      address: '789 Teacher Colony, New Delhi',
       joiningDate: new Date('2020-06-01'),
     },
   })
@@ -99,7 +99,7 @@ async function main() {
   const teacher2Password = await bcrypt.hash('teacher123', 12)
   const teacher2 = await prisma.user.create({
     data: {
-      name: 'सुनीता देवी',
+      name: 'Sunita Devi',
       email: 'sunita@modernschool.com',
       password: teacher2Password,
       role: UserRole.TEACHER,
@@ -109,7 +109,7 @@ async function main() {
 
   await prisma.teacher.create({
     data: {
-      name: 'सुनीता देवी',
+      name: 'Sunita Devi',
       employeeId: 'T002',
       subjects: ['Hindi', 'English'],
       schoolId: school2.id,
@@ -118,7 +118,7 @@ async function main() {
       experience: 8,
       phone: '+91-9876543211',
       email: 'sunita@modernschool.com',
-      address: '321 एजुकेशन नगर, मुंबई',
+      address: '321 Education Nagar, Mumbai',
       joiningDate: new Date('2018-04-01'),
     },
   })
@@ -128,10 +128,10 @@ async function main() {
   // Create parents
   const parent1 = await prisma.parent.create({
     data: {
-      name: 'राम सिंह',
+      name: 'Ram Singh',
       email: 'ram.singh@email.com',
       phone: '+91-9876543212',
-      address: '111 पैरेंट सोसाइटी, नई दिल्ली',
+      address: '111 Parent Society, New Delhi',
       schoolId: school1.id,
     },
   })
@@ -139,7 +139,7 @@ async function main() {
   const parent1Password = await bcrypt.hash('parent123', 12)
   await prisma.user.create({
     data: {
-      name: 'राम सिंह',
+      name: 'Ram Singh',
       email: 'ram.singh@email.com',
       password: parent1Password,
       role: UserRole.PARENT,
@@ -149,10 +149,10 @@ async function main() {
 
   const parent2 = await prisma.parent.create({
     data: {
-      name: 'गीता शर्मा',
+      name: 'Geeta Sharma',
       email: 'geeta.sharma@email.com',
       phone: '+91-9876543213',
-      address: '222 फैमिली कॉलोनी, मुंबई',
+      address: '222 Family Colony, Mumbai',
       schoolId: school2.id,
     },
   })
@@ -160,7 +160,7 @@ async function main() {
   const parent2Password = await bcrypt.hash('parent123', 12)
   await prisma.user.create({
     data: {
-      name: 'गीता शर्मा',
+      name: 'Geeta Sharma',
       email: 'geeta.sharma@email.com',
       password: parent2Password,
       role: UserRole.PARENT,
@@ -174,7 +174,7 @@ async function main() {
   const student1Password = await bcrypt.hash('student123', 12)
   const student1 = await prisma.user.create({
     data: {
-      name: 'राहुल सिंह',
+      name: 'Rahul Singh',
       email: 'rahul.singh@dps.com',
       password: student1Password,
       role: UserRole.STUDENT,
@@ -184,7 +184,7 @@ async function main() {
 
   await prisma.student.create({
     data: {
-      name: 'राहुल सिंह',
+      name: 'Rahul Singh',
       rollNumber: 'S001',
       class: '10',
       section: 'A',
@@ -193,7 +193,7 @@ async function main() {
       userId: student1.id,
       dateOfBirth: new Date('2008-05-15'),
       gender: Gender.MALE,
-      address: '111 पैरेंट सोसाइटी, नई दिल्ली',
+      address: '111 Parent Society, New Delhi',
       phone: '+91-9876543214',
       email: 'rahul.singh@dps.com',
       admissionDate: new Date('2023-04-01'),
@@ -203,7 +203,7 @@ async function main() {
   const student2Password = await bcrypt.hash('student123', 12)
   const student2 = await prisma.user.create({
     data: {
-      name: 'प्रिया शर्मा',
+      name: 'Priya Sharma',
       email: 'priya.sharma@modernschool.com',
       password: student2Password,
       role: UserRole.STUDENT,
@@ -213,7 +213,7 @@ async function main() {
 
   await prisma.student.create({
     data: {
-      name: 'प्रिया शर्मा',
+      name: 'Priya Sharma',
       rollNumber: 'S002',
       class: '9',
       section: 'B',
@@ -222,7 +222,7 @@ async function main() {
       userId: student2.id,
       dateOfBirth: new Date('2009-08-20'),
       gender: Gender.FEMALE,
-      address: '222 फैमिली कॉलोनी, मुंबई',
+      address: '222 Family Colony, Mumbai',
       phone: '+91-9876543215',
       email: 'priya.sharma@modernschool.com',
       admissionDate: new Date('2023-04-01'),
@@ -247,7 +247,7 @@ async function main() {
   // Create exams
   const exam1 = await prisma.exam.create({
     data: {
-      name: 'मिड टर्म एग्जाम',
+      name: 'Mid Term Exam',
       type: ExamType.MONTHLY,
       subject: 'Mathematics',
       class: '10',
@@ -263,7 +263,7 @@ async function main() {
 
   const exam2 = await prisma.exam.create({
     data: {
-      name: 'यूनिट टेस्ट',
+      name: 'Unit Test',
       type: ExamType.ASSIGNMENT,
       subject: 'Hindi',
       class: '9',
@@ -288,7 +288,7 @@ async function main() {
         amount: 5000,
         dueDate: new Date('2024-02-01'),
         status: 'PENDING',
-        description: 'मासिक शुल्क',
+        description: 'Monthly Fees',
         schoolId: school1.id,
       },
       {
@@ -298,7 +298,7 @@ async function main() {
         dueDate: new Date('2024-02-01'),
         status: 'PAID',
         paidDate: new Date('2024-01-25'),
-        description: 'मासिक शुल्क',
+        description: 'Monthly Fees',
         schoolId: school2.id,
       },
     ],
@@ -331,7 +331,7 @@ async function main() {
           studentId: student1Record.id,
           date: new Date('2024-01-17'),
           status: AttendanceStatus.LATE,
-          remarks: 'बस देरी से आई',
+          remarks: 'Bus was late',
           markedBy: teacher1.id,
           schoolId: school1.id,
         },
@@ -353,7 +353,7 @@ async function main() {
           studentId: student2Record.id,
           date: new Date('2024-01-16'),
           status: AttendanceStatus.ABSENT,
-          remarks: 'बुखार',
+          remarks: 'Fever',
           markedBy: teacher2.id,
           schoolId: school2.id,
         },
@@ -375,22 +375,22 @@ async function main() {
     data: [
       {
         userId: admin1.id,
-        title: 'सिस्टम वेलकम',
-        message: 'School ERP सिस्टम में आपका स्वागत है!',
+        title: 'System Welcome',
+        message: 'Welcome to School ERP System!',
         type: 'INFO',
         schoolId: school1.id,
       },
       {
         userId: teacher1.id,
-        title: 'नई कक्षा असाइनमेंट',
-        message: 'आपको कक्षा 10A का Mathematics विषय दिया गया है।',
+        title: 'New Class Assignment',
+        message: 'You have been assigned Mathematics subject for class 10A.',
         type: 'INFO',
         schoolId: school1.id,
       },
       {
         userId: student1.id,
-        title: 'एग्जाम रिमाइंडर',
-        message: 'कल Mathematics का मिड टर्म एग्जाम है।',
+        title: 'Exam Reminder',
+        message: 'Mathematics Mid Term Exam is tomorrow.',
         type: 'WARNING',
         schoolId: school1.id,
       },

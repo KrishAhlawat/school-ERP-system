@@ -9,14 +9,14 @@ export default function ParentDashboard() {
 
   const children = [
     {
-      name: 'राहुल सिंह',
+      name: 'Rahul Singh',
       class: '10A',
       rollNumber: 'S001',
       attendance: 95,
       lastExamGrade: 'A+',
     },
     {
-      name: 'प्रिया सिंह',
+      name: 'Priya Singh',
       class: '8B',
       rollNumber: 'S002',
       attendance: 88,
@@ -26,30 +26,30 @@ export default function ParentDashboard() {
 
   const stats = [
     {
-      title: 'बच्चों की संख्या',
+      title: 'Number of Children',
       value: children.length.toString(),
-      change: 'स्कूल में',
+      change: 'In School',
       icon: Users,
       color: 'text-blue-600',
     },
     {
-      title: 'औसत उपस्थिति',
+      title: 'Average Attendance',
       value: '91.5%',
-      change: 'इस महीने',
+      change: 'This Month',
       icon: TrendingUp,
       color: 'text-green-600',
     },
     {
-      title: 'बकाया शुल्क',
+      title: 'Outstanding Fees',
       value: '₹8,500',
-      change: '2 भुगतान',
+      change: '2 Payments',
       icon: DollarSign,
       color: 'text-orange-600',
     },
     {
-      title: 'आगामी घटनाएं',
+      title: 'Upcoming Events',
       value: '3',
-      change: 'इस सप्ताह',
+      change: 'This Week',
       icon: Calendar,
       color: 'text-purple-600',
     },
@@ -57,27 +57,27 @@ export default function ParentDashboard() {
 
   const recentActivities = [
     {
-      child: 'राहुल सिंह',
-      activity: 'गणित परीक्षा में A+ ग्रेड प्राप्त किया',
-      time: '2 घंटे पहले',
+      child: 'Rahul Singh',
+      activity: 'Achieved A+ grade in Mathematics exam',
+      time: '2 hours ago',
       type: 'achievement',
     },
     {
-      child: 'प्रिया सिंह',
-      activity: 'हिंदी असाइनमेंट जमा किया',
-      time: '1 दिन पहले',
+      child: 'Priya Singh',
+      activity: 'Submitted Hindi assignment',
+      time: '1 day ago',
       type: 'assignment',
     },
     {
-      child: 'राहुल सिंह',
-      activity: 'आज की कक्षा में उपस्थित रहे',
-      time: '2 दिन पहले',
+      child: 'Rahul Singh',
+      activity: 'Attended today\'s class',
+      time: '2 days ago',
       type: 'attendance',
     },
     {
-      child: 'प्रिया सिंह',
-      activity: 'स्पोर्ट्स डे में भाग लिया',
-      time: '3 दिन पहले',
+      child: 'Priya Singh',
+      activity: 'Participated in Sports Day',
+      time: '3 days ago',
       type: 'event',
     },
   ]
@@ -86,10 +86,10 @@ export default function ParentDashboard() {
     <div className="p-6 space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-          अभिभावक डैशबोर्ड
+          Parent Dashboard
         </h1>
         <p className="text-gray-600 dark:text-gray-400">
-          स्वागत है, {session?.user?.name}! आपके बच्चों की प्रगति यहां देखें।
+          Welcome, {session?.user?.name}! View your children's progress here.
         </p>
       </div>
 
@@ -122,10 +122,10 @@ export default function ParentDashboard() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Users className="h-5 w-5" />
-              मेरे बच्चे
+              My Children
             </CardTitle>
             <CardDescription>
-              आपके बच्चों की सामान्य जानकारी
+              General information about your children
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -136,7 +136,7 @@ export default function ParentDashboard() {
                     <div>
                       <h4 className="font-medium text-lg">{child.name}</h4>
                       <p className="text-sm text-gray-500">
-                        कक्षा {child.class} • रोल नंबर: {child.rollNumber}
+                        Class {child.class} • Roll Number: {child.rollNumber}
                       </p>
                     </div>
                     <div className="text-right">
@@ -147,16 +147,16 @@ export default function ParentDashboard() {
                       }`}>
                         {child.attendance}%
                       </div>
-                      <div className="text-xs text-gray-500">उपस्थिति</div>
+                      <div className="text-xs text-gray-500">Attendance</div>
                     </div>
                   </div>
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                       <Award className="h-4 w-4 text-yellow-500" />
-                      <span className="text-sm">अंतिम ग्रेड: {child.lastExamGrade}</span>
+                      <span className="text-sm">Last Grade: {child.lastExamGrade}</span>
                     </div>
                     <button className="text-sm text-blue-600 hover:text-blue-800">
-                      विस्तार देखें →
+                      View Details →
                     </button>
                   </div>
                 </div>
@@ -170,10 +170,10 @@ export default function ParentDashboard() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Calendar className="h-5 w-5" />
-              हाल की गतिविधियां
+              Recent Activities
             </CardTitle>
             <CardDescription>
-              आपके बच्चों की हाल की गतिविधियां
+              Recent activities of your children
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -201,9 +201,9 @@ export default function ParentDashboard() {
       {/* Upcoming Events */}
       <Card>
         <CardHeader>
-          <CardTitle>आगामी घटनाएं</CardTitle>
+          <CardTitle>Upcoming Events</CardTitle>
           <CardDescription>
-            स्कूल की आगामी घटनाओं और महत्वपूर्ण तिथियों की जानकारी
+            Information about upcoming school events and important dates
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -211,26 +211,26 @@ export default function ParentDashboard() {
             <div className="p-4 border rounded-lg">
               <div className="flex items-center gap-2 mb-2">
                 <Calendar className="h-4 w-4 text-blue-500" />
-                <span className="font-medium">पैरेंट-टीचर मीटिंग</span>
+                <span className="font-medium">Parent-Teacher Meeting</span>
               </div>
-              <p className="text-sm text-gray-600">25 जनवरी, 2024</p>
+              <p className="text-sm text-gray-600">January 25, 2024</p>
               <p className="text-xs text-gray-500">10:00 AM - 12:00 PM</p>
             </div>
             <div className="p-4 border rounded-lg">
               <div className="flex items-center gap-2 mb-2">
                 <BookOpen className="h-4 w-4 text-green-500" />
-                <span className="font-medium">मिड टर्म एग्जाम</span>
+                <span className="font-medium">Mid Term Exam</span>
               </div>
-              <p className="text-sm text-gray-600">1-15 फरवरी, 2024</p>
-              <p className="text-xs text-gray-500">सभी कक्षाएं</p>
+              <p className="text-sm text-gray-600">February 1-15, 2024</p>
+              <p className="text-xs text-gray-500">All Classes</p>
             </div>
             <div className="p-4 border rounded-lg">
               <div className="flex items-center gap-2 mb-2">
                 <DollarSign className="h-4 w-4 text-orange-500" />
-                <span className="font-medium">फीस भुगतान</span>
+                <span className="font-medium">Fee Payment</span>
               </div>
-              <p className="text-sm text-gray-600">5 फरवरी, 2024</p>
-              <p className="text-xs text-gray-500">अंतिम तिथि</p>
+              <p className="text-sm text-gray-600">February 5, 2024</p>
+              <p className="text-xs text-gray-500">Last Date</p>
             </div>
           </div>
         </CardContent>

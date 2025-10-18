@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Response } from 'express'
 import { body, validationResult } from 'express-validator'
 import { prisma } from '../server'
 import { asyncHandler, createError } from '../middlewares/errorHandler'
@@ -9,20 +9,20 @@ const router = express.Router()
 
 // Student validation rules
 const studentValidation = [
-  body('name').trim().isLength({ min: 2, max: 50 }).withMessage('नाम 2-50 अक्षरों का होना चाहिए'),
-  body('rollNumber').trim().isLength({ min: 1, max: 20 }).withMessage('रोल नंबर आवश्यक है'),
-  body('class').trim().isLength({ min: 1, max: 20 }).withMessage('कक्षा आवश्यक है'),
-  body('section').trim().isLength({ min: 1, max: 10 }).withMessage('सेक्शन आवश्यक है'),
-  body('parentId').isString().withMessage('वैध अभिभावक ID दर्ज करें'),
-  body('dateOfBirth').isISO8601().withMessage('वैध जन्म तिथि दर्ज करें'),
-  body('gender').isIn(['MALE', 'FEMALE', 'OTHER']).withMessage('वैध लिंग चुनें'),
-  body('address').trim().isLength({ min: 10, max: 500 }).withMessage('पता 10-500 अक्षरों का होना चाहिए'),
+  body('name').trim().isLength({ min: 2, max: 50 }).withMessage('Name must be between 2-50 characters'),
+  body('rollNumber').trim().isLength({ min: 1, max: 20 }).withMessage('Roll number is required'),
+  body('class').trim().isLength({ min: 1, max: 20 }).withMessage('Class is required'),
+  body('section').trim().isLength({ min: 1, max: 10 }).withMessage('Section is required'),
+  body('parentId').isString().withMessage('Please enter a valid parent ID'),
+  body('dateOfBirth').isISO8601().withMessage('Please enter a valid date of birth'),
+  body('gender').isIn(['MALE', 'FEMALE', 'OTHER']).withMessage('Please select a valid gender'),
+  body('address').trim().isLength({ min: 10, max: 500 }).withMessage('Address must be between 10-500 characters'),
 ]
 
 // @route   GET /api/students
 // @desc    Get all students for the school
 // @access  Private
-router.get('/', asyncHandler(async (req: AuthRequest & TenantRequest, res) => {
+router.get('/', asyncHandler(async (req: AuthRequest & TenantRequest, res: Response) => {
   const { schoolId } = req
   const { page = 1, limit = 10, search, class: className, section } = req.query
 
@@ -88,7 +88,7 @@ router.get('/', asyncHandler(async (req: AuthRequest & TenantRequest, res) => {
 // @route   GET /api/students/:id
 // @desc    Get student by ID
 // @access  Private
-router.get('/:id', asyncHandler(async (req: AuthRequest & TenantRequest, res) => {
+router.get('/:id', asyncHandler(async (req: AuthRequest & TenantRequest, res: Response) => {
   const { id } = req.params
   const { schoolId } = req
 
@@ -145,7 +145,7 @@ router.get('/:id', asyncHandler(async (req: AuthRequest & TenantRequest, res) =>
 // @route   POST /api/students
 // @desc    Create a new student
 // @access  Private (Admin/Teacher)
-router.post('/', studentValidation, asyncHandler(async (req: AuthRequest & TenantRequest, res) => {
+router.post('/', studentValidation, asyncHandler(async (req: AuthRequest & TenantRequest, res: Response) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json({
@@ -246,7 +246,7 @@ router.post('/', studentValidation, asyncHandler(async (req: AuthRequest & Tenan
 // @route   PUT /api/students/:id
 // @desc    Update student
 // @access  Private (Admin/Teacher)
-router.put('/:id', studentValidation, asyncHandler(async (req: AuthRequest & TenantRequest, res) => {
+router.put('/:id', studentValidation, asyncHandler(async (req: AuthRequest & TenantRequest, res: Response) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json({
@@ -361,7 +361,7 @@ router.put('/:id', studentValidation, asyncHandler(async (req: AuthRequest & Ten
 // @route   DELETE /api/students/:id
 // @desc    Delete student (soft delete)
 // @access  Private (Admin only)
-router.delete('/:id', asyncHandler(async (req: AuthRequest & TenantRequest, res) => {
+router.delete('/:id', asyncHandler(async (req: AuthRequest & TenantRequest, res: Response) => {
   const { id } = req.params
   const { schoolId, user } = req
 

@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Response } from 'express'
 import { prisma } from '../server'
 import { asyncHandler } from '../middlewares/errorHandler'
 import { AuthRequest } from '../middlewares/auth'
@@ -9,7 +9,7 @@ const router = express.Router()
 // @route   GET /api/teachers
 // @desc    Get all teachers for the school
 // @access  Private
-router.get('/', asyncHandler(async (req: AuthRequest & TenantRequest, res) => {
+router.get('/', asyncHandler(async (req: AuthRequest & TenantRequest, res: Response) => {
   const { schoolId } = req
   const { page = 1, limit = 10, search } = req.query
 
@@ -72,7 +72,7 @@ router.get('/', asyncHandler(async (req: AuthRequest & TenantRequest, res) => {
 // @route   GET /api/teachers/:id
 // @desc    Get teacher by ID
 // @access  Private
-router.get('/:id', asyncHandler(async (req: AuthRequest & TenantRequest, res) => {
+router.get('/:id', asyncHandler(async (req: AuthRequest & TenantRequest, res: Response) => {
   const { id } = req.params
   const { schoolId } = req
 

@@ -1,13 +1,15 @@
 import { Request, Response, NextFunction } from 'express'
 import jwt from 'jsonwebtoken'
 import { UserRole } from '@school-erp/shared'
+import type { UserRole as PrismaUserRole } from '@prisma/client'
 import { prisma } from '../server'
 
 export interface AuthRequest extends Request {
   user?: {
     id: string
     email: string
-    role: UserRole
+    // use Prisma-generated enum type to match DB user records
+    role: PrismaUserRole
     schoolId: string
   }
 }
@@ -82,7 +84,9 @@ export const requireRole = (...roles: UserRole[]) => {
       })
     }
 
-    if (!roles.includes(req.user.role)) {
+    // Compare by string value to avoid enum type mismatch between prisma and shared package
+    const roleValue = String(req.user.role) as unknown as UserRole
+    if (!roles.includes(roleValue)) {
       return res.status(403).json({
         success: false,
         message: 'Insufficient permissions',

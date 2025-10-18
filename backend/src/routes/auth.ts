@@ -1,11 +1,11 @@
-import express from 'express'
+import express, { Response } from 'express'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { body, validationResult } from 'express-validator'
 import { prisma } from '../server'
 import { asyncHandler, createError } from '../middlewares/errorHandler'
 import { AuthRequest } from '../middlewares/auth'
-import { UserRole } from '@school-erp/shared'
+import { UserRole } from '../../../shared'
 
 const router = express.Router()
 
@@ -28,24 +28,24 @@ const generateTokens = (userId: string) => {
 
 // Register validation rules
 const registerValidation = [
-  body('name').trim().isLength({ min: 2, max: 50 }).withMessage('नाम 2-50 अक्षरों का होना चाहिए'),
-  body('email').isEmail().normalizeEmail().withMessage('वैध ईमेल दर्ज करें'),
-  body('password').isLength({ min: 6 }).withMessage('पासवर्ड कम से कम 6 अक्षर का होना चाहिए'),
-  body('role').isIn(Object.values(UserRole)).withMessage('वैध भूमिका चुनें'),
-  body('schoolId').optional().isString().withMessage('वैध स्कूल ID दर्ज करें'),
+  body('name').trim().isLength({ min: 2, max: 50 }).withMessage('Name must be between 2-50 characters'),
+  body('email').isEmail().normalizeEmail().withMessage('Please enter a valid email address'),
+  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters long'),
+  body('role').isIn(Object.values(UserRole)).withMessage('Please select a valid role'),
+  body('schoolId').optional().isString().withMessage('Please enter a valid school ID'),
 ]
 
 // Login validation rules
 const loginValidation = [
-  body('email').isEmail().normalizeEmail().withMessage('वैध ईमेल दर्ज करें'),
-  body('password').notEmpty().withMessage('पासवर्ड आवश्यक है'),
-  body('schoolDomain').optional().isString().withMessage('वैध स्कूल डोमेन दर्ज करें'),
+  body('email').isEmail().normalizeEmail().withMessage('Please enter a valid email address'),
+  body('password').notEmpty().withMessage('Password is required'),
+  body('schoolDomain').optional().isString().withMessage('Please enter a valid school domain'),
 ]
 
 // @route   POST /api/auth/register
 // @desc    Register a new user
 // @access  Public
-router.post('/register', registerValidation, asyncHandler(async (req: AuthRequest, res) => {
+router.post('/register', registerValidation, asyncHandler(async (req: AuthRequest, res: Response) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json({
@@ -105,7 +105,7 @@ router.post('/register', registerValidation, asyncHandler(async (req: AuthReques
 // @route   POST /api/auth/login
 // @desc    Login user
 // @access  Public
-router.post('/login', loginValidation, asyncHandler(async (req: AuthRequest, res) => {
+router.post('/login', loginValidation, asyncHandler(async (req: AuthRequest, res: Response) => {
   const errors = validationResult(req)
   if (!errors.isEmpty()) {
     return res.status(400).json({
@@ -197,7 +197,7 @@ router.post('/login', loginValidation, asyncHandler(async (req: AuthRequest, res
 // @route   POST /api/auth/google
 // @desc    Google OAuth login/register
 // @access  Public
-router.post('/google', asyncHandler(async (req: AuthRequest, res) => {
+router.post('/google', asyncHandler(async (req: AuthRequest, res: Response) => {
   const { email, name, googleId } = req.body
 
   if (!email || !name || !googleId) {
@@ -283,7 +283,7 @@ router.post('/google', asyncHandler(async (req: AuthRequest, res) => {
 // @route   POST /api/auth/refresh
 // @desc    Refresh access token
 // @access  Public
-router.post('/refresh', asyncHandler(async (req: AuthRequest, res) => {
+router.post('/refresh', asyncHandler(async (req: AuthRequest, res: Response) => {
   const { refreshToken } = req.body
 
   if (!refreshToken) {
@@ -326,7 +326,7 @@ router.post('/refresh', asyncHandler(async (req: AuthRequest, res) => {
 // @route   GET /api/auth/me
 // @desc    Get current user
 // @access  Private
-router.get('/me', asyncHandler(async (req: AuthRequest, res) => {
+router.get('/me', asyncHandler(async (req: AuthRequest, res: Response) => {
   if (!req.user) {
     throw createError('Authentication required', 401)
   }
@@ -368,7 +368,7 @@ router.get('/me', asyncHandler(async (req: AuthRequest, res) => {
 // @route   POST /api/auth/logout
 // @desc    Logout user (invalidate tokens)
 // @access  Private
-router.post('/logout', asyncHandler(async (req: AuthRequest, res) => {
+router.post('/logout', asyncHandler(async (req: AuthRequest, res: Response) => {
   // In a real application, you might want to blacklist the token
   // For now, we'll just return success
   res.json({

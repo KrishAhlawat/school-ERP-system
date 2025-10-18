@@ -9,23 +9,23 @@ export default function UnauthorizedPage() {
         <div className="text-center">
           <AlertTriangle className="mx-auto h-16 w-16 text-red-500" />
           <h2 className="mt-6 text-3xl font-bold text-gray-900 dark:text-white">
-            अनधिकृत पहुंच
+            Unauthorized Access
           </h2>
           <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-            आपके पास इस पेज तक पहुंचने की अनुमति नहीं है।
+            You don't have permission to access this page.
           </p>
         </div>
         
         <div className="mt-8 space-y-4">
           <Link href="/login">
             <Button className="w-full">
-              लॉगिन पेज पर वापस जाएं
+              Back to Login
             </Button>
           </Link>
           
           <Link href="/">
             <Button variant="outline" className="w-full">
-              होम पेज पर जाएं
+              Go to Home
             </Button>
           </Link>
         </div>

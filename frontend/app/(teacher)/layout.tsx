@@ -24,7 +24,7 @@ export default async function TeacherLayout({
         <div className="w-64 bg-white dark:bg-gray-800 shadow-lg">
           <div className="p-6">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-              शिक्षक पैनल
+              Teacher Panel
             </h2>
           </div>
           <nav className="mt-6">
@@ -33,49 +33,49 @@ export default async function TeacherLayout({
                 href="/teacher/dashboard"
                 className="block px-3 py-2 text-sm font-medium text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 rounded-md"
               >
-                डैशबोर्ड
+                Dashboard
               </a>
               <a
                 href="/teacher/classes"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                मेरी कक्षाएं
+                My Classes
               </a>
               <a
                 href="/teacher/attendance"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                उपस्थिति
+                Attendance
               </a>
               <a
                 href="/teacher/exams"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                परीक्षाएं
+                Exams
               </a>
               <a
                 href="/teacher/grading"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                ग्रेडिंग
+                Grading
               </a>
               <a
                 href="/teacher/assignments"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                असाइनमेंट
+                Assignments
               </a>
               <a
                 href="/teacher/reports"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                रिपोर्ट्स
+                Reports
               </a>
               <a
                 href="/teacher/profile"
                 className="block px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               >
-                प्रोफाइल
+                Profile
               </a>
             </div>
           </nav>
@@ -99,7 +99,7 @@ export default async function TeacherLayout({
                   href="/api/auth/signout"
                   className="text-sm text-red-600 hover:text-red-800"
                 >
-                  लॉगआउट
+                  Logout
                 </a>
               </div>
             </div>

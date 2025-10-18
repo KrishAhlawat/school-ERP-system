@@ -1,15 +1,16 @@
-import express from 'express'
+import express, { Response } from 'express'
 import { prisma } from '../server'
 import { asyncHandler } from '../middlewares/errorHandler'
 import { AuthRequest } from '../middlewares/auth'
 import { TenantRequest } from '../middlewares/tenant'
+import { ExamType } from '@prisma/client'
 
 const router = express.Router()
 
 // @route   GET /api/exams
 // @desc    Get all exams for the school
 // @access  Private
-router.get('/', asyncHandler(async (req: AuthRequest & TenantRequest, res) => {
+router.get('/', asyncHandler(async (req: AuthRequest & TenantRequest, res: Response) => {
   const { schoolId } = req
   const { page = 1, limit = 10, search, type, class: className } = req.query
 
@@ -17,7 +18,7 @@ router.get('/', asyncHandler(async (req: AuthRequest & TenantRequest, res) => {
     throw new Error('School context required')
   }
 
-  const where = {
+  const where: any = {
     schoolId,
     isActive: true,
     ...(search && {
@@ -26,7 +27,7 @@ router.get('/', asyncHandler(async (req: AuthRequest & TenantRequest, res) => {
         { subject: { contains: search as string, mode: 'insensitive' as const } },
       ],
     }),
-    ...(type && { type: type as string }),
+    ...(type && Object.values(ExamType).includes(type as ExamType) && { type: type as ExamType }),
     ...(className && { class: className as string }),
   }
 
